@@ -53,13 +53,33 @@ This tutorial outlines the implementation of on-premises Active Directory within
 
   <img src="https://i.imgur.com/aCDi8pt.png" height="40%" width="40%" alt="Disk Sanitization Steps"/>
   
-- Step 3
-- Step 4
 
-<h2>Deployment and Configuration Steps</h2>
 
-<p>
-<img src="https://i.imgur.com/aCDi8pt.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<h2>Deployment and Configuration Steps of Active Directory</h2>
+
+- Install Active Directory
+ 
+  -Login to DC-1 and install Active Directory Domain Services. In the Server Manager click on Add roles and features, click next until Server Roles and click on "Active Directory Domain" Services and Add Features continue and install. Wait the installation to complete.
+
+<img src="https://i.imgur.com/T5bxHmw.png" height="60%" width="=60%" alt="Disk Sanitization Steps"/>
+
+<img src="https://i.imgur.com/1KVOre5.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+  
+  -Close the installation window and go to notifications and promote this server to a domain controller: Setup a new forest as example.com (can be anything, just remember what it is). Set the password and click next until installation.
+  
+  <img src="https://i.imgur.com/vXmeiwA.png" height="50%" width="50%" alt="Disk Sanitization Steps"/>
+  <img src="https://i.imgur.com/zC9UDvk.png" height="50%" width="50%" alt="Disk Sanitization Steps"/>
+
+ 
+  
+  -Restart and then log back into DC-1 as user: mydomain.com\labuser.
+ 
+- Item 2
+- Item 3
+- Item 4
+- Item 5
+
+<img src="https://i.imgur.com/zC9UDvk.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
