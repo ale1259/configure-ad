@@ -70,16 +70,29 @@ This tutorial outlines the implementation of on-premises Active Directory within
   <img src="https://i.imgur.com/vXmeiwA.png" height="50%" width="50%" alt="Disk Sanitization Steps"/>
   <img src="https://i.imgur.com/zC9UDvk.png" height="50%" width="50%" alt="Disk Sanitization Steps"/>
 
+ - It will restart, but if not, restart and then log back into DC-1 as user: example.com\labuser.
+
+ <img src="https://i.imgur.com/o838YHq.png" height="30%" width="30%" alt="Disk Sanitization Steps"/>
  
+- Create an Admin and Normal User Account in AD
+ 
+  -In Active Directory Users and Computers (ADUC), create an Organizational Unit (OU) called “_EMPLOYEES”
   
-  -Restart and then log back into DC-1 as user: mydomain.com\labuser.
- 
-- Item 2
+  -Create a new OU named “_ADMINS”
+
+  -Create a new employee named “Jane Doe” (same password) with the username of “jane_admin”
+  
+  -Add jane_admin to the “Domain Admins” Security Group
+
+  -Log out/close the Remote Desktop connection to DC-1 and log back in as “mydomain.com\jane_admin”
+  
+  -User jane_admin as your admin account from now on
+
 - Item 3
 - Item 4
 - Item 5
 
-<img src="https://i.imgur.com/zC9UDvk.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/o838YHq.png" height="40%" width="40%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
