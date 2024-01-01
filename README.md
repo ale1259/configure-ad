@@ -135,27 +135,26 @@ This tutorial outlines the implementation of on-premises Active Directory within
 
 
 
-- Item 5
+- Create a bunch of additional users and attempt to log into "Client-1" with one of the users:
 
-<img src="https://i.imgur.com/sXXxcN6.png" height="40%" width="40%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
+  -Login to DC-1 as "johnadmin"
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
+  -Open PowerShell_ISE as an administrator
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
+  -Create a new File and paste the contents of the script into it (https://github.com/joshmadakor1/AD_PS/blob/master/Generate-Names-Create-Users.ps1)
+
+  <img src="https://i.imgur.com/yUBkaGH.png" height="40%" width="40%" alt="Disk Sanitization Steps"/>
+
+  -Run the script and observe the accounts being created. You don't need to create 10000 accounts, to try just 10 will be perfect. also the password could be whatever you want it will be the same for the users. Click on the green play button to run the script
+
+  <img src="https://i.imgur.com/ajFmkIT.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+
+  -You'll see the accounts being created on the blue window. When finished, open ADUC and observe the accounts in the appropriate OU "_EMPLOYEES"
+
+  -Choose any of the accounts created, take note of the name, you can double-click on one of them and go to Account and see the name there as well and 
+
+  -Attempt to log into Client-1 with one of the accounts (take note of the password in the script). If you login without any issue, Congratulations!!!  
+
+   <img src="https://i.imgur.com/Tc42aPY.png" height="40%" width="40%" alt="Disk Sanitization Steps"/>
+
+
