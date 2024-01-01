@@ -96,21 +96,38 @@ This tutorial outlines the implementation of on-premises Active Directory within
 
 - Join Client-1 to your domain (example.com):
 
- -Login to Client-1 (Remote Desktop) as the original local admin (labuser) and join it to the domain (computer will restart)
- 
+ -Login to Client-1 (Remote Desktop) as the original local admin (labuser)
+
  -We need to check "Client-1" DNS Server is "DC-1" IP Address (10.0.0.4 in this case). To do this open command prompt and type ipconfig /all
  
   <img src="https://i.imgur.com/XV6OLu5.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-
- -Login to the Domain Controller (Remote Desktop) and verify Client-1 shows up in Active Directory Users and Computers (ADUC) inside the “Computers” container on the root of the domain
  
- -Create a new OU named “_CLIENTS” and drag Client-1 into there (Step is not really necessary, just for organizational purposes. I guess I skipped this in the lab!)
+ -Join "Client-1" to our domain "example.com". Right-click on windows logo -> Systems -> Rename this PC(advanced) -> Change -> Member of -> Click on domain and type example.com
+
+ <img src="https://i.imgur.com/23Z8svY.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+
+ -When this window shows off you can use either "johnadmin" or "labuser" accounts. And a welcome window will follow it click Ok as well on the next windows and close to restart the PC and apply the changes 
+
+ <img src="https://i.imgur.com/l8BppWY.png" height="40%" width="40%" alt="Disk Sanitization Steps"/>
+
+ -Login to the Domain Controller (Remote Desktop) and verify Client-1 shows up in Active Directory Users and Computers (ADUC) inside the “Computers” container on the root of the domain and drag "Client-1" to "_CLIENTS" OU just for organizational purposes
+
+ <img src="https://i.imgur.com/ZsWU8rJ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+ 
 
 
 
 
+- Setup Remote Desktop for non-administrative users on Client-1
 
-- Item 4
+  -Log into Client-1 as example.com\johnadmin and open System like before when joining "Client-1" to the domain, but this time go to "Remote Desktop". Click on "Select users that can remotly access this PC" -> Add -> type domain on the blank -> Check names-> Select Domain Users -> OK
+  
+  <img src="https://i.imgur.com/sXXxcN6.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+  
+  -You can now log into Client-1 as a normal, non-administrative user now
+ 
+  -Normally you’d want to do this with Group Policy that allows you to change MANY systems at once 
+
 
 
 
@@ -120,7 +137,7 @@ This tutorial outlines the implementation of on-premises Active Directory within
 
 - Item 5
 
-<img src="https://i.imgur.com/AGKe52p.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/sXXxcN6.png" height="40%" width="40%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
