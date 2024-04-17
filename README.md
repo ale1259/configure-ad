@@ -29,11 +29,11 @@ This tutorial outlines the implementation of on-premises Active Directory within
 
   -Take note of the Resource Group and Virtual Network (Vnet) that were created at this time "ADlab" and "DC-1-vnet".
 
-  -Set Domain Controller’s NIC Private IP address to be static. To do this go to "DC-1" in the Azure Portal -> Virtual Machines -> DC-1 -> Networking -> Network Interface(click there) -> IP Configurations -> ipconfig -> Allocation -> Static and Save. 
+  -Set Domain Controller’s NIC Private IP address to be static. To do this go to "DC-1" in the Azure Portal -> Virtual Machines -> DC-1 -> Left column click on "Networking Settings" -> "Network interface/IP configurations"(click the link) ->  blue link that says "ipconfig1"(click there) -> Allocation -> Static and Save. 
   
   -Create the Client VM (Windows 10) named “Client-1”. Use the same Resource Group and  the Vnet of "DC-1" in Step 1.
 
-  -Set up DNS Server of "Client-1" to be "DC-1" IP Address. For this step we need to go to the Azure Portal -> Virtual Machines ->  Client-1 -> Networking -> Network Interface(click there) -> DNS Servers -> Custom -> DC-1 IP Address -> Save. Restart "Client-1"
+  -Set up DNS Server of "Client-1" to be "DC-1" IP Address. For this step we need to go to the Azure Portal -> Virtual Machines ->  Client-1 -> Networking -> Network interface/IP configuratiopn(click there) -> DNS Servers on the left column after you click  -> Custom -> DC-1 IP Address -> Save. Restart "Client-1"
 
  
   -Ensure that both VMs are in the same Vnet (you can check the topology with Network Watcher)
@@ -42,16 +42,16 @@ This tutorial outlines the implementation of on-premises Active Directory within
 
   -Login to Client-1 with Remote Desktop and ping DC-1’s private IP address with ping -t "ip address of DC-1" (perpetual ping).
 
-  <img src="https://i.imgur.com/ExD61na.png" height="40%" width="40%" alt="Disk Sanitization Steps"/>
+  <img src="https://i.imgur.com/HMg4Rrn.png" height="60%" width="60%" alt="Disk Sanitization Steps"/>
 
-  -It will say "Requested timed out" and to fix this we need to login to the Domain Controller and enable ICMPv4 in on the local windows Firewall. For this open Windows Defender Firewall -> Advanced Settings -> Inbound Rules and look up for Core Networking Diagnosticos-ICMPv4 Echo Request (ICMPv4-In), enable both right click Enable Rule.
+  -It will say "Requested timed out" and to fix this we need to login to the Domain Controller and enable ICMPv4 in on the local windows Firewall. For this open Windows Defender Firewall -> Advanced Settings -> Inbound Rules and look up for Core Networking Diagnosticos-ICMPv4 Echo Request (ICMPv4-In), enable both right click -> Enable Rule.
 
-  <img src="https://i.imgur.com/kIJVisq.png" height="29%" width="29%" alt="Disk Sanitization Steps"/><img src="https://i.imgur.com/WVbx9k6.png" height="70%" width="70%" alt="Disk Sanitization Steps"/>
+  <img src="https://i.imgur.com/6vv0EWz.png" height="70%" width="70%" alt="Disk Sanitization Steps"/>
 
 
   -Check back at Client-1 to see the ping succeed.
 
-  <img src="https://i.imgur.com/aCDi8pt.png" height="40%" width="40%" alt="Disk Sanitization Steps"/>
+  <img src="https://i.imgur.com/NBuzgdv.png" height="60%" width="60%" alt="Disk Sanitization Steps"/>
   
 
 
@@ -59,38 +59,42 @@ This tutorial outlines the implementation of on-premises Active Directory within
 
 - Install Active Directory:
  
-  -Login to DC-1 and install Active Directory Domain Services. In the Server Manager click on Add roles and features, click next until Server Roles and click on "Active Directory Domain" Services and Add Features continue and install. Wait the installation to complete.
+  -Login to DC-1 and install Active Directory Domain Services. In the Server Manager click on Add roles and features.
 
-<img src="https://i.imgur.com/T5bxHmw.png" height="60%" width="=60%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/WqNBtAT.png" height="60%" width="=60%" alt="Disk Sanitization Steps"/>
 
-<img src="https://i.imgur.com/1KVOre5.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+ -Click next until "Server Roles" section and click on "Active Directory Domain" Services and Add Features continue and install. Wait the installation to complete.
+
+<img src="https://i.imgur.com/YlxT3bm.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
   
   -Close the installation window and go to notifications and promote this server to a domain controller: Setup a new forest as example.com (can be anything, just remember what it is). Set the password and click next until installation.
   
-  <img src="https://i.imgur.com/vXmeiwA.png" height="50%" width="50%" alt="Disk Sanitization Steps"/>
-  <img src="https://i.imgur.com/zC9UDvk.png" height="50%" width="50%" alt="Disk Sanitization Steps"/>
+  <img src="https://i.imgur.com/JF2D03s.png" height="60%" width="60%" alt="Disk Sanitization Steps"/>
+  
+  <img src="https://i.imgur.com/Fy6rMzM.png" height="70%" width="70%" alt="Disk Sanitization Steps"/>
 
-  -It will restart, but if not, restart and then log back into DC-1 as user: example.com\labuser.
+  -It will restart, but if not, restart and then log back into DC-1 as user: "username of the domain\username used to login previously". In my case is "example.com\labuser" .
 
  <img src="https://i.imgur.com/o838YHq.png" height="30%" width="30%" alt="Disk Sanitization Steps"/>
  
 - Create an Admin and Normal User Account in AD:
  
-  -In Active Directory Users and Computers (ADUC), create an Organizational Unit (OU) called “_EMPLOYEES”, one called "_ADMINS" and another called "_CLIENTS"
+  -Go to Active Directory Users and Computers on your search bar, create an Organizational Unit (OU) called “_EMPLOYEES”, one called "_ADMINS" and another called "_CLIENTS"
 
   <img src="https://i.imgur.com/jwF5pQF.png" height="60%" width="60%" alt="Disk Sanitization Steps"/>
 
-  -Create a new employee named “John Smith” (same password) with the username of “johnadmin”. When creating the passsword uncheck. "User must change password at next logon" and check "Password never expires"
-  <img src="https://i.imgur.com/hm6V026.png" height="50%" width="50%" alt="Disk Sanitization Steps"/><img src="https://i.imgur.com/DohxPGj.png" height="41%" width="41%" alt="Disk Sanitization Steps"/>
+  -Create a new employee named “John Smith” on the "_ADMINS" OU with the username of “johnadmin”, to do this right-click on _ADMINS OU -> New -> User. When creating the passsword uncheck "User must change password at next logon" and check "Password never expires"
+
+  <img src="https://i.imgur.com/95Iegb5.png" height="50%" width="50%" alt="Disk Sanitization Steps"/><img src="https://i.imgur.com/DohxPGj.png" height="41%" width="41%" alt="Disk Sanitization Steps"/>
 
   
-  -Add "johnadmin" to the “Domain Admins” Security Group. Click on example.com to see the new user. Right click on johnadmin -> Properties -> Member of -> type domain on the blank -> Check names -> Domain Admins. Drag "johnadmin" to "_ADMINS" OU for organizational purposes
+  -Now this user is not an admin yet is in the _ADMINS OU but does not have admins privileges so let's add "johnadmin" to the “Domain Admins” Security Group. Click on _ADMINS OU to see the new user. Right click on johnadmin -> Properties -> Member of -> type domain on the blank -> Check names -> Domain Admins. 
   
-  <img src="https://i.imgur.com/MuHOHYw.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+  <img src="https://i.imgur.com/1mxFjDq.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 
   -Log out/close the Remote Desktop connection to DC-1 and log back in as “example.com\johnadmin”
 
-<img src="https://i.imgur.com/7ZTQFvF.png" height="40%" width="40%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/d0ixsr1.png" height="60%" width="60%" alt="Disk Sanitization Steps"/>
   
   -User "johnadmin" as your admin account from now on
 
@@ -102,7 +106,7 @@ This tutorial outlines the implementation of on-premises Active Directory within
  
   <img src="https://i.imgur.com/XV6OLu5.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
  
- -Join "Client-1" to our domain "example.com". Right-click on windows logo -> Systems -> Rename this PC(advanced) -> Change -> Member of -> Click on domain and type example.com
+ -Join "Client-1" to our domain "example.com". Right-click on windows logo -> Systems -> "Rename this PC(advanced)" not  Rename this PC -> Change -> Member of -> Click on Domain and type example.com
 
  <img src="https://i.imgur.com/23Z8svY.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 
@@ -110,14 +114,10 @@ This tutorial outlines the implementation of on-premises Active Directory within
 
  <img src="https://i.imgur.com/l8BppWY.png" height="40%" width="40%" alt="Disk Sanitization Steps"/>
 
- -Login to the Domain Controller (Remote Desktop) and verify Client-1 shows up in Active Directory Users and Computers (ADUC) inside the “Computers” container on the root of the domain and drag "Client-1" to "_CLIENTS" OU just for organizational purposes
+ -Login to the Domain Controller (Remote Desktop) and verify Client-1 shows up in Active Directory Users and Computers  inside the “Computers” container on the root of the domain and drag "Client-1" to "_CLIENTS" OU just for organizational purposes
 
- <img src="https://i.imgur.com/ZsWU8rJ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+ <img src="https://i.imgur.com/neoQS4o.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
  
-
-
-
-
 - Setup Remote Desktop for non-administrative users on Client-1
 
   -Log into Client-1 as example.com\johnadmin and open System like before when joining "Client-1" to the domain, but this time go to "Remote Desktop". Click on "Select users that can remotly access this PC" -> Add -> type domain on the blank -> Check names-> Select Domain Users -> OK
@@ -145,7 +145,7 @@ This tutorial outlines the implementation of on-premises Active Directory within
 
   <img src="https://i.imgur.com/yUBkaGH.png" height="40%" width="40%" alt="Disk Sanitization Steps"/>
 
-  -Run the script and observe the accounts being created. You don't need to create 10000 accounts, to try just 10 will be perfect. also the password could be whatever you want it will be the same for the users. Click on the green play button to run the script
+  -Run the script and observe the accounts being created. You don't need to create 10000 accounts, to try just 10 will be perfect, also the password could be whatever you want it will be the same for the users. Click on the green play button to run the script
 
   <img src="https://i.imgur.com/ajFmkIT.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 
